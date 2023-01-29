@@ -4,10 +4,16 @@ app = Flask(__name__)
 
 submissions = []
 
-@app.route("/problem/<problem_id>")
+@app.route("/problem/<int:problem_id>")
 def problem(problem_id):
-    # Replace this with code to fetch the problem description for the given problem_id
-    return render_template("problem.html")
+    if problem_id == 1:
+        return render_template("problem1.html")
+    elif problem_id == 2:
+        return render_template("problem2.html")
+    elif problem_id == 3:
+        return render_template("problem3.html")
+    else:
+        return render_template("404.html")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -43,9 +49,19 @@ def index():
                 <th>Difficulty</th>
             </tr>
             <tr>
-                <td><a href="/problem/1">Problem 1</a></td>
-                <td>1 sec</td>
+                <td><a href="/problem/1">Palindrome</a></td>
+                <td>2 sec</td>
                 <td>Easy</td>
+            </tr>
+            <tr>
+                <td><a href="/problem/2">Sysadmin</a></td>
+                <td>3 sec</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td><a href="/problem/3">One more sequence</a></td>
+                <td>3 sec</td>
+                <td>Hard</td>
             </tr>
         </table>
         <div class="column">
