@@ -7,8 +7,7 @@ submissions = []
 @app.route("/problem/<problem_id>")
 def problem(problem_id):
     # Replace this with code to fetch the problem description for the given problem_id
-    problem_description = "This is a description of problem " + problem_id
-    return render_template("problem.html", description=problem_description)
+    return render_template("problem.html")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
