@@ -1,0 +1,18 @@
+[
+    {
+        "input":[
+            "abaaba"
+        ],
+        "output":[
+            "aabbaa"
+        ]
+    },
+    {
+        "input":[
+            "ab"
+        ],
+        "output":[
+            "IMPOSSIBLE"
+        ]
+    }
+]

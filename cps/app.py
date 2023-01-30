@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+from system import system
 app = Flask(__name__)
 
 submissions = []
@@ -18,10 +18,33 @@ def problem(problem_id):
 @app.route("/", methods=["GET", "POST"])
 def index():
     language = ""
+    problem = ""
+    file_extension = ""
+    output = ""
     if request.method == "POST":
         text = request.form["text"]
+        problem = request.form["problem"]
         language = request.form["language"]
-        submissions.append((text, language))
+        submissions.append((text, problem, language))
+        if language == "Python":
+            file_extension = ".py"
+            with open("cps/program_files/program.py", "w") as f:
+                f.write(text)
+        elif language == "C":
+            file_extension = ".c"
+            with open("cps/program_files/program.c", "w") as f:
+                f.write(text)
+        elif language == "C++":
+            file_extension = ".cpp"
+            with open("cps/program_files/program.cpp", "w") as f:
+                f.write(text)
+        elif language == "Java":
+            file_extension = ".java"
+            with open("cps/program_files/program.java", "w") as f:
+                f.write(text)
+
+        output = system(language, f"cps/program_files/program{file_extension}", problem)
+        output = output.replace("\n", "<br>")
     return f"""
         <style>
             h1 {{
@@ -50,26 +73,30 @@ def index():
             </tr>
             <tr>
                 <td><a href="/problem/1">Palindrome</a></td>
-                <td>2 sec</td>
+                <td>0.5 sec</td>
                 <td>Easy</td>
             </tr>
             <tr>
                 <td><a href="/problem/2">Sysadmin</a></td>
-                <td>3 sec</td>
+                <td>0.2 sec</td>
                 <td>Medium</td>
             </tr>
             <tr>
                 <td><a href="/problem/3">One more sequence</a></td>
-                <td>3 sec</td>
+                <td>0.3 sec</td>
                 <td>Hard</td>
             </tr>
         </table>
         <div class="column">
             <form method="post">
-                Text: <br>
+                Source code: <br>
                 <textarea name="text" rows="10" cols="50"></textarea>
                 <br>
-                Language:
+                <select name="problem">
+                    <option value="Palindrome">Palindrome</option>
+                    <option value="Sysadmin">Sysadmin</option>
+                    <option value="One more sequence">One more sequence</option>
+                </select>
                 <select name="language">
                     <option value="Python">Python</option>
                     <option value="C">C</option>
@@ -80,8 +107,8 @@ def index():
             </form>
         </div>
         <div class="column">
-            Submitted text and language:<br>
-            {'<br>'.join([f"{text} ({language})" for text, language in submissions])}
+            Submitions:<br>
+            {output}
         </div>
     """
 
