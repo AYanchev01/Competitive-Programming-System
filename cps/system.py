@@ -50,35 +50,26 @@ def system(language, program_file, problem):
         time_taken = time() - start_time
         actual_output = process.stdout.decode().strip().replace('\r', '')
         if process.returncode == 0 and required_output == actual_output:
-            print(f"Test Case {i} Passed and took {time_taken:.3f} seconds")
             output += f"Test Case {i} Passed and took {time_taken:.3f} seconds\n"
         else:
             failed_cases += 1
-            print(f"Test Case {i} Failed")
             output += f"Test Case {i} Failed\n"
             if process.returncode == 0:
-                print(f"Required Output:\n{required_output}\n---------------")
-                print(f"Actual Output:\n{actual_output}\n---------------\n(took {time_taken:.3f} seconds)\n")
                 output += f"Required Output:\n{required_output}\n---------------\n"
                 output += f"Actual Output:\n{actual_output}\n---------------\n(took {time_taken:.3f} seconds)\n"
             else:
-                print("---------------")
-                print(f"Runtime Error: (took {time_taken:.3f} seconds)")
-                print(process.stderr.decode().strip())
-                print("---------------\n")
                 output += "---------------\n"
                 output += f"Runtime Error: (took {time_taken:.3f} seconds)\n"
                 output += process.stderr.decode().strip()
                 output += "\n---------------\n\n"
 
-    if file_to_run != program_file:
-        os.remove(file_to_run)
+    os.remove(file_to_run)
+    os.remove(program_file)
+    os.rmdir(program_file.parent)
 
     if failed_cases == 0:
-        print("All tests passed successfully.")
         output += "All tests passed successfully."
     else:
-        print(f"{failed_cases}/{total_cases} Test Cases Failed")
         output += f"{failed_cases}/{total_cases} Test Cases Failed"
 
     return output
