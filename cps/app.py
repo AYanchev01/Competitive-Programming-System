@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from system import system
+import os
 app = Flask(__name__)
 
 submissions = []
@@ -26,6 +27,7 @@ def index():
         problem = request.form["problem"]
         language = request.form["language"]
         submissions.append((text, problem, language))
+        os.mkdir("cps/program_files")
         if language == "Python":
             file_extension = ".py"
             with open("cps/program_files/program.py", "w") as f:
@@ -90,7 +92,7 @@ def index():
         <div class="column">
             <form method="post">
                 Source code: <br>
-                <textarea name="text" rows="10" cols="50"></textarea>
+                <textarea name="text" rows="20" cols="140"></textarea>
                 <br>
                 <select name="problem">
                     <option value="Palindrome">Palindrome</option>

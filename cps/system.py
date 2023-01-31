@@ -63,7 +63,8 @@ def system(language, program_file, problem):
                 output += process.stderr.decode().strip()
                 output += "\n---------------\n\n"
 
-    os.remove(file_to_run)
+    if file_to_run != program_file:
+        os.remove(file_to_run)
     os.remove(program_file)
     os.rmdir(program_file.parent)
 
