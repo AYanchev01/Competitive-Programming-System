@@ -42,6 +42,7 @@ def system(language, program_file, problem):
         "C++": cpp_run
     }
 
+    output += f"{problem} | "
     for i, test_case in enumerate(test_cases, 1):
         input_data = "\n".join(test_case["input"]).encode()
         required_output = "\n".join(test_case["output"])
@@ -50,28 +51,22 @@ def system(language, program_file, problem):
         time_taken = time() - start_time
         actual_output = process.stdout.decode().strip().replace('\r', '')
         if process.returncode == 0 and required_output == actual_output:
-            output += f"Test Case {i} Passed and took {time_taken:.3f} seconds\n"
+            output += "ok "
+            if time_taken > test_case["time_limit"]:
+                output += f"tl({time_taken:.3f}) "
         else:
             failed_cases += 1
-            output += f"Test Case {i} Failed\n"
-            if process.returncode == 0:
-                output += f"Required Output:\n{required_output}\n---------------\n"
-                output += f"Actual Output:\n{actual_output}\n---------------\n(took {time_taken:.3f} seconds)\n"
-            else:
-                output += "---------------\n"
-                output += f"Runtime Error: (took {time_taken:.3f} seconds)\n"
-                output += process.stderr.decode().strip()
-                output += "\n---------------\n\n"
+            output += "wa "
+            if process.returncode != 0:
+                output += "re "
 
     if file_to_run != program_file:
         os.remove(file_to_run)
     os.remove(program_file)
     os.rmdir(program_file.parent)
 
-    if failed_cases == 0:
-        output += "All tests passed successfully."
-    else:
-        output += f"{failed_cases}/{total_cases} Test Cases Failed"
+    res = (total_cases - failed_cases) * 100 // total_cases
+    output += f"( {res}/100 )"
 
     return output
 

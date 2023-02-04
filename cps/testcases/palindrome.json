@@ -5,7 +5,49 @@
         ],
         "output":[
             "aabbaa"
-        ]
+        ],
+        "time_limit":
+            0.03
+    },
+    {
+        "input":[
+            "ffdkslfklkfsjaajdlkl"
+        ],
+        "output":[
+            "adffjkkllssllkkjffda"
+        ],
+        "time_limit":
+            0.03
+    },
+    {
+        "input":[
+            "rreggjggnebjnb"
+        ],
+        "output":[
+            "beggjnrrnjggeb"
+        ],
+        "time_limit":
+            0.03
+    },
+    {
+        "input":[
+            "hello"
+        ],
+        "output":[
+            "IMPOSSIBLE"
+        ],
+        "time_limit":
+            0.03
+    },
+    {
+        "input":[
+            "debelarabbaralebed"
+        ],
+        "output":[
+            "aabbdeelrrleedbbaa"
+        ],
+        "time_limit":
+            0.03
     },
     {
         "input":[
@@ -13,6 +55,8 @@
         ],
         "output":[
             "IMPOSSIBLE"
-        ]
+        ],
+        "time_limit":
+            0.03
     }
 ]
