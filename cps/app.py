@@ -54,6 +54,7 @@ def index():
             }}
             table {{
                 width: 100%;
+                font-size: 20px;
             }}
             td, th {{
                 border: 1px solid black;
@@ -64,9 +65,15 @@ def index():
                 float: left;
                 width: 50%;
                 padding: 10px;
+                font-size: 20px;
+                font-weight: bold;
+            }}
+            .submission-text {{
+                font-size: 20px;
+                font-weight: bold;
             }}
         </style>
-        <h1>Competitive programming system</h1>
+        <h1>Competitive Programming System</h1>
         <table>
             <tr>
                 <th>Problem</th>
@@ -75,17 +82,17 @@ def index():
             </tr>
             <tr>
                 <td><a href="/problem/1">Palindrome</a></td>
-                <td>0.5 sec</td>
+                <td>0.03 sec</td>
                 <td>Easy</td>
             </tr>
             <tr>
                 <td><a href="/problem/2">Sysadmin</a></td>
-                <td>0.2 sec</td>
+                <td>0.02 sec</td>
                 <td>Medium</td>
             </tr>
             <tr>
                 <td><a href="/problem/3">One more sequence</a></td>
-                <td>0.3 sec</td>
+                <td>0.1 sec</td>
                 <td>Hard</td>
             </tr>
         </table>
@@ -109,11 +116,16 @@ def index():
             </form>
         </div>
         <div class="column">
-            Submitions:<br>
+        <span class="submission-text">Submissions:</span><br>
             <table>
-              {
+                <tr>
+                <th>Problem</th>
+                <th>Test Cases</th>
+                <th>Score</th>
+                </tr>
+                {
                 "".join([f"<tr><td>{problem}</td><td>{submission}</td><td>{score}</td></tr>" for submission in submissions])
-              }
+                }
             </table>
         </div>
     """
