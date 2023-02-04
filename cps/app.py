@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from system import system
+from services.system import system
 import os
 app = Flask(__name__)
 
@@ -20,13 +20,12 @@ def problem(problem_id):
 def index():
     language = ""
     problem = ""
-    file_extension = ""
     output = ""
+    file_extension = ""
     if request.method == "POST":
         text = request.form["text"]
         problem = request.form["problem"]
         language = request.form["language"]
-        submissions.append((text, problem, language))
         os.mkdir("cps/program_files")
         if language == "Python":
             file_extension = ".py"
@@ -47,6 +46,7 @@ def index():
 
         output = system(language, f"cps/program_files/program{file_extension}", problem)
         output = output.replace("\n", "<br>")
+        submissions.append(output)
     return f"""
         <style>
             h1 {{
@@ -110,7 +110,7 @@ def index():
         </div>
         <div class="column">
             Submitions:<br>
-            {output}
+            {'<br>'.join(submissions)}
         </div>
     """
 

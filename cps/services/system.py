@@ -2,12 +2,13 @@ from time import time
 import json
 import pathlib
 import os
-from compiler import (
+
+from services.compiler import (
     java_compile,
     c_compile,
     cpp_compile
 )
-from runner import (
+from services.runner import (
     python_run,
     java_run,
     c_run,
@@ -56,11 +57,12 @@ def system(language, program_file, problem):
                 output += f"tl({time_taken:.3f}) "
         else:
             failed_cases += 1
-            output += "wa "
-            if process.returncode != 0:
+            if process.returncode == 0:
+                output += "wa "
+            else:
                 output += "re "
 
-    if file_to_run != program_file:
+    if os.path.exists(file_to_run) and file_to_run != program_file:
         os.remove(file_to_run)
     os.remove(program_file)
     os.rmdir(program_file.parent)
