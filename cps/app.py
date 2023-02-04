@@ -44,7 +44,7 @@ def index():
             with open("cps/program_files/program.java", "w") as f:
                 f.write(text)
 
-        output = system(language, f"cps/program_files/program{file_extension}", problem)
+        output, score = system(language, f"cps/program_files/program{file_extension}", problem)
         output = output.replace("\n", "<br>")
         submissions.append(output)
     return f"""
@@ -110,7 +110,11 @@ def index():
         </div>
         <div class="column">
             Submitions:<br>
-            {'<br>'.join(submissions)}
+            <table>
+              {
+                "".join([f"<tr><td>{problem}</td><td>{submission}</td><td>{score}</td></tr>" for submission in submissions])
+              }
+            </table>
         </div>
     """
 

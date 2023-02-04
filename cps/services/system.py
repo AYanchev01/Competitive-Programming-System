@@ -43,7 +43,6 @@ def system(language, program_file, problem):
         "C++": cpp_run
     }
 
-    output += f"{problem} | "
     for i, test_case in enumerate(test_cases, 1):
         input_data = "\n".join(test_case["input"]).encode()
         required_output = "\n".join(test_case["output"])
@@ -68,9 +67,9 @@ def system(language, program_file, problem):
     os.rmdir(program_file.parent)
 
     res = (total_cases - failed_cases) * 100 // total_cases
-    output += f"( {res}/100 )"
+    score = f"{res}/100"
 
-    return output
+    return output, score
 
 def compile(program_file, language):
     file_to_run = program_file
