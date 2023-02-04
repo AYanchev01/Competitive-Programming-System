@@ -47,88 +47,9 @@ def index():
         output, score = system(language, f"cps/program_files/program{file_extension}", problem)
         output = output.replace("\n", "<br>")
         submissions.append(output)
-    return f"""
-        <style>
-            h1 {{
-                text-align: center;
-            }}
-            table {{
-                width: 100%;
-                font-size: 20px;
-            }}
-            td, th {{
-                border: 1px solid black;
-                padding: 8px;
-                text-align: left;
-            }}
-            .column {{
-                float: left;
-                width: 50%;
-                padding: 10px;
-                font-size: 20px;
-                font-weight: bold;
-            }}
-            .submission-text {{
-                font-size: 20px;
-                font-weight: bold;
-            }}
-        </style>
-        <h1>Competitive Programming System</h1>
-        <table>
-            <tr>
-                <th>Problem</th>
-                <th>Time Limit</th>
-                <th>Difficulty</th>
-            </tr>
-            <tr>
-                <td><a href="/problem/1">Palindrome</a></td>
-                <td>0.03 sec</td>
-                <td>Easy</td>
-            </tr>
-            <tr>
-                <td><a href="/problem/2">Sysadmin</a></td>
-                <td>0.02 sec</td>
-                <td>Medium</td>
-            </tr>
-            <tr>
-                <td><a href="/problem/3">One more sequence</a></td>
-                <td>0.1 sec</td>
-                <td>Hard</td>
-            </tr>
-        </table>
-        <div class="column">
-            <form method="post">
-                Source code: <br>
-                <textarea name="text" rows="20" cols="140"></textarea>
-                <br>
-                <select name="problem">
-                    <option value="Palindrome">Palindrome</option>
-                    <option value="Sysadmin">Sysadmin</option>
-                    <option value="One more sequence">One more sequence</option>
-                </select>
-                <select name="language">
-                    <option value="Python">Python</option>
-                    <option value="C">C</option>
-                    <option value="C++">C++</option>
-                    <option value="Java">Java</option>
-                </select>
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-        <div class="column">
-        <span class="submission-text">Submissions:</span><br>
-            <table>
-                <tr>
-                <th>Problem</th>
-                <th>Test Cases</th>
-                <th>Score</th>
-                </tr>
-                {
-                "".join([f"<tr><td>{problem}</td><td>{submission}</td><td>{score}</td></tr>" for submission in submissions])
-                }
-            </table>
-        </div>
-    """
+
+    submission_rows = "".join([f"<tr><td>{problem}</td><td>{submission}</td><td>{score}</td></tr>" for submission in submissions])
+    return render_template("index.html", output=output, submission_rows=submission_rows)
 
 if __name__ == "__main__":
     app.run()
