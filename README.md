@@ -5,12 +5,13 @@
 ╚═╩═╩╩╩╣╔╩═╩═╩╩═╩╝╚═╝╚═╝╚╝╚╝╚═╬╗╠╝╚══╩╩╩╩╩╩╩╩╩═╬╗║╚══╬╗╠═╩═╩═╩╩╩╝
 ───────╚╝─────────────────────╚═╝──────────────╚═╝───╚═╝
 
-A web-based platform for compiling, running and evaluating programming submissions.
+A web-based platform for automatic grading of competitive programming problems.
 
-### Getting Started
+## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-Prerequisites
+
+### Prerequisites
 
 You will need to have the following software installed on your machine:
 
