@@ -28,7 +28,7 @@ Clone the repository to your local machine:
 
 Navigate to the project directory:
 
-`$ cd competitive-programming-system`
+`$ cd .\Competitive-Programming-System\cps\`
 
 Install the required packages:
 
