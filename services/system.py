@@ -6,7 +6,7 @@ from time import time
 import json
 import pathlib
 import os
-from typing import Union,Tuple
+from typing import Tuple
 
 from services.compiler import java_compile, c_compile, cpp_compile
 from services.runner import python_run, java_run, c_run, cpp_run
@@ -20,13 +20,13 @@ def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
     program_file = pathlib.Path(program_file).resolve()
 
     if problem == "Palindrome":
-        with open("cps/testcases/palindrome.json", "r", encoding="utf8") as file:
+        with open("testcases/palindrome.json", "r", encoding="utf8") as file:
             test_cases = json.load(file)
     elif problem == "Sysadmin":
-        with open("cps/testcases/sysadmin.json", "r", encoding="utf8") as file:
+        with open("testcases/sysadmin.json", "r", encoding="utf8") as file:
             test_cases = json.load(file)
     elif problem == "One more sequence":
-        with open("cps/testcases/one_more_sequence.json", "r", encoding="utf8") as file:
+        with open("testcases/one_more_sequence.json", "r", encoding="utf8") as file:
             test_cases = json.load(file)
     else:
         raise ValueError(f"Invalid problem name {problem}")

@@ -36,25 +36,25 @@ def index() -> str:
         text = request.form["text"]
         problem = request.form["problem"]
         language = request.form["language"]
-        os.mkdir("cps/program_files")
+        os.mkdir("program_files")
         if language == "Python":
             file_extension = ".py"
-            with open("cps/program_files/program.py", "w", encoding="utf8") as file:
+            with open("program_files/program.py", "w", encoding="utf8") as file:
                 file.write(text)
         elif language == "C":
             file_extension = ".c"
-            with open("cps/program_files/program.c", "w", encoding="utf8") as file:
+            with open("program_files/program.c", "w", encoding="utf8") as file:
                 file.write(text)
         elif language == "C++":
             file_extension = ".cpp"
-            with open("cps/program_files/program.cpp", "w", encoding="utf8") as file:
+            with open("program_files/program.cpp", "w", encoding="utf8") as file:
                 file.write(text)
         elif language == "Java":
             file_extension = ".java"
-            with open("cps/program_files/program.java", "w", encoding="utf8") as file:
+            with open("program_files/program.java", "w", encoding="utf8") as file:
                 file.write(text)
 
-        output, score = system(language, f"cps/program_files/program{file_extension}", problem)
+        output, score = system(language, f"program_files/program{file_extension}", problem)
         output = output.replace("\n", "<br>")
         submissions.append(output)
 
