@@ -1,37 +1,36 @@
+"""
+This file contains the logic for the system.
+It compiles, runs and checks the submittions.
+"""
 from time import time
 import json
 import pathlib
 import os
+from typing import Union,Tuple
 
-from services.compiler import (
-    java_compile,
-    c_compile,
-    cpp_compile
-)
-from services.runner import (
-    python_run,
-    java_run,
-    c_run,
-    cpp_run
-)
+from services.compiler import java_compile, c_compile, cpp_compile
+from services.runner import python_run, java_run, c_run, cpp_run
 
-def system(language, program_file, problem):
-    
+"""
+Main function of the system.
+"""
+def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
+
     output = ""
     program_file = pathlib.Path(program_file).resolve()
 
     if problem == "Palindrome":
-        with open("cps/testcases/palindrome.json", "r") as f:
-            test_cases = json.load(f)
+        with open("cps/testcases/palindrome.json", "r", encoding="utf8") as file:
+            test_cases = json.load(file)
     elif problem == "Sysadmin":
-        with open("cps/testcases/sysadmin.json", "r") as f:
-            test_cases = json.load(f)
+        with open("cps/testcases/sysadmin.json", "r", encoding="utf8") as file:
+            test_cases = json.load(file)
     elif problem == "One more sequence":
-        with open("cps/testcases/one_more_sequence.json", "r") as f:
-            test_cases = json.load(f)
+        with open("cps/testcases/one_more_sequence.json", "r", encoding="utf8") as file:
+            test_cases = json.load(file)
     else:
         raise ValueError(f"Invalid problem name {problem}")
-    
+
 
     file_to_run = compile(program_file, language)
     total_cases = len(test_cases)
@@ -71,7 +70,10 @@ def system(language, program_file, problem):
 
     return output, score
 
-def compile(program_file, language):
+"""
+This function compiles the program file.
+"""
+def compile(program_file: pathlib.Path, language: str) -> (pathlib.Path | str):
     file_to_run = program_file
     if language == "Java":
         java_compile(program_file)
