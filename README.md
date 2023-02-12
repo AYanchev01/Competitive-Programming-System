@@ -22,15 +22,15 @@ You will need to have the following software installed on your machine:
 
 ### Installing
 
-Clone the repository to your local machine:
+- Clone the repository to your local machine:
 
 `$ git clone https://github.com/AYanchev01/Competitive-Programming-System.git`
 
-Navigate to the project directory:
+- Navigate to the project directory:
 
 `$ cd .\Competitive-Programming-System\`
 
-Install the required packages:
+- Install the required packages:
 
 `$ pip install -r requirements.txt`
 
