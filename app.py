@@ -56,10 +56,10 @@ def index() -> str:
 
         output, score = system(language, f"program_files/program{file_extension}", problem)
         output = output.replace("\n", "<br>")
-        submissions.append(output)
+        submissions.append((problem, output, score))
 
     submission_rows = "".join([f"<tr><td>{problem}</td><td>{submission}</td><td>{score}</td></tr>"
-     for submission in submissions])
+     for problem, submission, score in submissions])
     return render_template("index.html", output=output, submission_rows=submission_rows)
 
 if __name__ == "__main__":
