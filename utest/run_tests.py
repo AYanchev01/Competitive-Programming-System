@@ -8,11 +8,11 @@ import shutil
 
 class TestSystem(unittest.TestCase):
     def setUp(self):
-        shutil.copy2("utests/sysadmin.cpp", "../program_files/sysadmin.cpp")
-        shutil.copy2("utests/sysadmin.c", "../program_files/sysadmin.c")
-        shutil.copy2("utests/sysadmin.py", "../program_files/sysadmin.py")
+        if not os.path.exists("../program_files"):
+            os.mkdir("../program_files")
 
     def test_system_python(self):
+        shutil.copy2("utest/sysadmin.py", "../program_files/sysadmin.py")
         program_file = pathlib.Path("../program_files/sysadmin.py")
         problem = "Sysadmin"
         language = "Python"
@@ -20,6 +20,7 @@ class TestSystem(unittest.TestCase):
         self.assertEqual(score, "100/100")
 
     def test_system_c(self):
+        shutil.copy2("utest/sysadmin.c", "../program_files/sysadmin.c")
         program_file = pathlib.Path("../program_files/sysadmin.c")
         problem = "Sysadmin"
         language = "C"
@@ -27,6 +28,7 @@ class TestSystem(unittest.TestCase):
         self.assertEqual(score, "100/100")
 
     def test_system_cpp(self):
+        shutil.copy2("utest/sysadmin.cpp", "../program_files/sysadmin.cpp")
         program_file = pathlib.Path("../program_files/sysadmin.cpp")
         problem = "Sysadmin"
         language = "C++"
