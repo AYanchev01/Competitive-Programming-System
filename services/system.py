@@ -71,10 +71,10 @@ def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
         score = f"{res}/100"
 
         return output, score
-    except FileNotFoundError as exception:
+    except FileNotFoundError:
         os.remove(program_file)
         os.rmdir(program_file.parent)
-        return str(exception), "0/100"
+        return f"{language} compiler not found !!!", "0/100"
 
 """
 This function compiles the program file.
