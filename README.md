@@ -17,10 +17,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 You will need to have the following software installed on your machine:
 
-    Python 3.x
-    Flask
-    GCC/G++
-    Java Development Kit (JDK)
+   * Python 3.x
+   * Flask
+   * GCC/G++ (Optional) 
+   * Java Development Kit (JDK) (Optional)
 
 ---
 ### Installing
