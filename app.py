@@ -2,8 +2,8 @@
 This is the main file for the web app. It contains the Flask app and all the routes.
 """
 import os
-from services.system import system
 from flask import Flask, render_template, request
+from services.system import system
 app = Flask(__name__)
 
 submissions = []
