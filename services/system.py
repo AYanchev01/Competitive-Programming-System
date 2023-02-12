@@ -74,7 +74,7 @@ def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
     except Exception:
         os.remove(program_file)
         os.rmdir(program_file.parent)
-        return "No compiler found", "0/100"
+        return "No compiler found!!!", "0/100"
 
 """
 This function compiles the program file.
