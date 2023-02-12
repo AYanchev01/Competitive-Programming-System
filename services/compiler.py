@@ -19,8 +19,7 @@ def c_compile(program_file: Path) -> str:
     if program_file.suffix != ".c":
         raise ValueError("Please use .c extention for C input file")
     output_file = program_file.with_suffix(".exe")
-    subprocess.run(["gcc", "-O2", "-std=c++17",
-     str(program_file), "-o", str(output_file)], check=False)
+    subprocess.run(["gcc", "-O2", str(program_file), "-o", str(output_file)], check=False)
     return str(output_file)
 
 """

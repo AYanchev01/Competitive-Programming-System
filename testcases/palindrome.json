@@ -7,7 +7,7 @@
             "aabbaa"
         ],
         "time_limit":
-            0.03
+            0.06
     },
     {
         "input":[
@@ -17,7 +17,7 @@
             "adffjkkllssllkkjffda"
         ],
         "time_limit":
-            0.03
+            0.06
     },
     {
         "input":[
@@ -27,7 +27,7 @@
             "beggjnrrnjggeb"
         ],
         "time_limit":
-            0.03
+            0.06
     },
     {
         "input":[
@@ -37,7 +37,7 @@
             "IMPOSSIBLE"
         ],
         "time_limit":
-            0.03
+            0.06
     },
     {
         "input":[
@@ -47,7 +47,7 @@
             "aabbdeelrrleedbbaa"
         ],
         "time_limit":
-            0.03
+            0.06
     },
     {
         "input":[
@@ -57,6 +57,6 @@
             "IMPOSSIBLE"
         ],
         "time_limit":
-            0.03
+            0.06
     }
 ]

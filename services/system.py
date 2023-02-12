@@ -50,9 +50,11 @@ def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
         time_taken = time() - start_time
         actual_output = process.stdout.decode().strip().replace('\r', '')
         if process.returncode == 0 and required_output == actual_output:
-            output += "ok "
             if time_taken > test_case["time_limit"]:
                 output += f"tl({time_taken:.3f}) "
+                failed_cases += 1
+            else:
+                output += "ok "
         else:
             failed_cases += 1
             if process.returncode == 0:
