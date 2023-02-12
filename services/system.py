@@ -20,13 +20,13 @@ def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
     program_file = pathlib.Path(program_file).resolve()
 
     if problem == "Palindrome":
-        with open("testcases/palindrome.json", "r", encoding="utf8") as file:
+        with open("data/palindrome.json", "r", encoding="utf8") as file:
             test_cases = json.load(file)
     elif problem == "Sysadmin":
-        with open("testcases/sysadmin.json", "r", encoding="utf8") as file:
+        with open("data/sysadmin.json", "r", encoding="utf8") as file:
             test_cases = json.load(file)
     elif problem == "One more sequence":
-        with open("testcases/one_more_sequence.json", "r", encoding="utf8") as file:
+        with open("data/one_more_sequence.json", "r", encoding="utf8") as file:
             test_cases = json.load(file)
     else:
         raise ValueError(f"Invalid problem name {problem}")
