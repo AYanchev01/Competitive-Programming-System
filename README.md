@@ -5,7 +5,7 @@
 ╚═╩═╩╩╩╣╔╩═╩═╩╩═╩╝╚═╝╚═╝╚╝╚╝╚═╬╗╠╝╚══╩╩╩╩╩╩╩╩╩═╬╗║╚══╬╗╠═╩═╩═╩╩╩╝
 ───────╚╝─────────────────────╚═╝──────────────╚═╝───╚═╝
 
-A web-based platform for automatic grading of competitive programming problems.
+ ~ A web-based platform for automatic grading of competitive programming problems. ~
 
 ## Getting Started
 
