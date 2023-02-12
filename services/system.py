@@ -15,62 +15,66 @@ from .runner import python_run, java_run, c_run, cpp_run
 Main function of the system.
 """
 def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
+    try:
+        output = ""
+        program_file = pathlib.Path(program_file).resolve()
 
-    output = ""
-    program_file = pathlib.Path(program_file).resolve()
-
-    if problem == "Palindrome":
-        with open("data/palindrome.json", "r", encoding="utf8") as file:
-            test_cases = json.load(file)
-    elif problem == "Sysadmin":
-        with open("data/sysadmin.json", "r", encoding="utf8") as file:
-            test_cases = json.load(file)
-    elif problem == "One more sequence":
-        with open("data/one_more_sequence.json", "r", encoding="utf8") as file:
-            test_cases = json.load(file)
-    else:
-        raise ValueError(f"Invalid problem name {problem}")
-
-
-    file_to_run = compile(program_file, language)
-    total_cases = len(test_cases)
-    failed_cases = 0
-    languages = {
-        "Python": python_run,
-        "Java": java_run,
-        "C": c_run,
-        "C++": cpp_run
-    }
-
-    for i, test_case in enumerate(test_cases, 1):
-        input_data = "\n".join(test_case["input"]).encode()
-        required_output = "\n".join(test_case["output"])
-        start_time = time()
-        process = languages[language](file_to_run, input_data)
-        time_taken = time() - start_time
-        actual_output = process.stdout.decode().strip().replace('\r', '')
-        if process.returncode == 0 and required_output == actual_output:
-            if time_taken > test_case["time_limit"]:
-                output += f"tl({time_taken:.3f}) "
-                failed_cases += 1
-            else:
-                output += "ok "
+        if problem == "Palindrome":
+            with open("data/palindrome.json", "r", encoding="utf8") as file:
+                test_cases = json.load(file)
+        elif problem == "Sysadmin":
+            with open("data/sysadmin.json", "r", encoding="utf8") as file:
+                test_cases = json.load(file)
+        elif problem == "One more sequence":
+            with open("data/one_more_sequence.json", "r", encoding="utf8") as file:
+                test_cases = json.load(file)
         else:
-            failed_cases += 1
-            if process.returncode == 0:
-                output += "wa "
+            raise ValueError(f"Invalid problem name {problem}")
+
+
+        file_to_run = compile(program_file, language)
+        total_cases = len(test_cases)
+        failed_cases = 0
+        languages = {
+            "Python": python_run,
+            "Java": java_run,
+            "C": c_run,
+            "C++": cpp_run
+        }
+
+        for i, test_case in enumerate(test_cases, 1):
+            input_data = "\n".join(test_case["input"]).encode()
+            required_output = "\n".join(test_case["output"])
+            start_time = time()
+            process = languages[language](file_to_run, input_data)
+            time_taken = time() - start_time
+            actual_output = process.stdout.decode().strip().replace('\r', '')
+            if process.returncode == 0 and required_output == actual_output:
+                if time_taken > test_case["time_limit"]:
+                    output += f"tl({time_taken:.3f}) "
+                    failed_cases += 1
+                else:
+                    output += "ok "
             else:
-                output += "re "
+                failed_cases += 1
+                if process.returncode == 0:
+                    output += "wa "
+                else:
+                    output += "re "
 
-    if os.path.exists(file_to_run) and file_to_run != program_file:
-        os.remove(file_to_run)
-    os.remove(program_file)
-    os.rmdir(program_file.parent)
+        if os.path.exists(file_to_run) and file_to_run != program_file:
+            os.remove(file_to_run)
+        os.remove(program_file)
+        os.rmdir(program_file.parent)
 
-    res = (total_cases - failed_cases) * 100 // total_cases
-    score = f"{res}/100"
+        res = (total_cases - failed_cases) * 100 // total_cases
+        score = f"{res}/100"
 
-    return output, score
+        return output, score
+    except Exception:
+        os.remove(program_file)
+        os.rmdir(program_file.parent)
+        return "No compiler found", "0/100"
 
 """
 This function compiles the program file.
