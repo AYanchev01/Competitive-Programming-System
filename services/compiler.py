@@ -13,7 +13,7 @@ def java_compile(program_file: Path) -> None:
     try:
         subprocess.run(["javac", "-version"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except subprocess.CalledProcessError:
-        raise Exception("javac is not installed or is not added to PATH")
+        raise FileNotFoundError("javac is not installed or is not added to PATH !!!")
     subprocess.run(["javac", str(program_file)], check=True)
 
 """
@@ -25,7 +25,7 @@ def c_compile(program_file: Path) -> str:
     try:
         subprocess.run(["gcc", "-v"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except subprocess.CalledProcessError:
-        raise Exception("gcc is not installed or is not added to PATH")
+        raise FileNotFoundError("gcc is not installed or is not added to PATH !!!")
     output_file = program_file.with_suffix(".exe")
     subprocess.run(["gcc", "-O2", str(program_file), "-o", str(output_file)], check=True)
     return str(output_file)
@@ -39,7 +39,7 @@ def cpp_compile(program_file: Path) -> str:
     try:
         subprocess.run(["g++", "-v"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except subprocess.CalledProcessError:
-        raise Exception("g++ is not installed or is not added to PATH")
+        raise FileNotFoundError("g++ is not installed or is not added to PATH !!!")
     output_file = program_file.with_suffix(".exe")
     subprocess.run(["g++", "-O2", "-std=c++17", str(program_file), "-o", str(output_file)], check=True)
     return str(output_file)

@@ -71,7 +71,7 @@ def system(language: str, program_file: str, problem: str) -> Tuple[str, str]:
         score = f"{res}/100"
 
         return output, score
-    except Exception as exception:
+    except FileNotFoundError as exception:
         os.remove(program_file)
         os.rmdir(program_file.parent)
         return str(exception), "0/100"
