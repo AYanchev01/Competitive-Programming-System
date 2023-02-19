@@ -2,6 +2,7 @@
 This is the main file for the web app. It contains the Flask app and all the routes.
 """
 import os
+from multiprocessing import Pool
 from flask import Flask, render_template, request
 from services.system import system
 app = Flask(__name__)
@@ -54,7 +55,12 @@ def index() -> str:
             with open("program_files/program.java", "w", encoding="utf8") as file:
                 file.write(text)
 
-        output, score = system(language, f"program_files/program{file_extension}", problem)
+        pool = Pool(processes=10)
+        result = pool.apply_async(system, (language, f"program_files/program{file_extension}", problem))
+        output, score = result.get()
+        pool.close()
+        pool.join()
+
         output = output.replace("\n", "<br>")
         submissions.append((problem, output, score))
 
