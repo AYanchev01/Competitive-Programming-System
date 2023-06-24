@@ -1,5 +1,6 @@
-
- ~ A web-based platform for automatic grading of competitive programming problems. ~
+# Competitive Programming System
+ - A web-based platform for automatic grading of competitive programming problems.
+ - Uni project for practicing Python and Flask
 
 ---
 ## Getting Started
